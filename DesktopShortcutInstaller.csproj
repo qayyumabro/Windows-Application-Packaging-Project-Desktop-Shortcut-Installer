@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <!-- If you don't need WinRT APIs, keep it simple -->
+    <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
@@ -18,11 +19,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Only keep CsWinRT if you actually use WinRT APIs in code -->
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.4" />
-
-    <!-- Windows SDK targeting pack (compile-time refs) -->
-    <PackageReference Include="Microsoft.Windows.SDK.NET.Ref" Version="10.0.19041.38" PrivateAssets="all" />
+    <!-- REMOVE these: they are what typically triggers NETSDK1130 via WinMD refs -->
+    <!-- <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.4" /> -->
+    <!-- <PackageReference Include="Microsoft.Windows.SDK.NET.Ref" Version="10.0.19041.38" PrivateAssets="all" /> -->
   </ItemGroup>
 
   <ItemGroup>
