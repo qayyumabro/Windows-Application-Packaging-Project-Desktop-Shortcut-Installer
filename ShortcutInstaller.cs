@@ -24,6 +24,7 @@ namespace DesktopShortcutInstaller
         /// This creates the desktop shortcut without requiring any code from the user!
         /// </summary>
         [ModuleInitializer]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA2255:The 'ModuleInitializer' attribute should not be used in libraries", Justification = "This is intentional - the library needs to auto-initialize")]
         public static void Initialize()
         {
             // Run on a background thread to avoid blocking app startup
@@ -139,11 +140,19 @@ namespace DesktopShortcutInstaller
                 XNamespace ns = "http://schemas.microsoft.com/appx/manifest/foundation/windows10";
                 XNamespace uapNs = "http://schemas.microsoft.com/appx/manifest/uap/windows10";
 
-                // Get display name
-                var displayNameElement = doc.Descendants(ns + "DisplayName").FirstOrDefault()
-                                      ?? doc.Descendants(uapNs + "VisualElements").FirstOrDefault()?.Attribute("DisplayName");
-                
-                string displayName = displayNameElement?.Value ?? package.DisplayName;
+                // Get display name - try element first, then attribute
+                string displayName;
+                var displayNameElement = doc.Descendants(ns + "DisplayName").FirstOrDefault();
+                if (displayNameElement != null)
+                {
+                    displayName = displayNameElement.Value;
+                }
+                else
+                {
+                    // Try to get from VisualElements attribute
+                    var visualElementsForName = doc.Descendants(uapNs + "VisualElements").FirstOrDefault();
+                    displayName = visualElementsForName?.Attribute("DisplayName")?.Value ?? package.DisplayName;
+                }
 
                 // Get application ID
                 var applicationElement = doc.Descendants(ns + "Application").FirstOrDefault();
