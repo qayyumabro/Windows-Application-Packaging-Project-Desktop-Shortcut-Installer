@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>DesktopShortcutInstaller</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Abro</Authors>
+    <Company>abro.pk</Company>
+    <Description>Automatically creates desktop shortcuts for Windows packaged applications (MSIX/AppX) using app information from Package.appxmanifest. ZERO CODE REQUIRED - just install the package!</Description>
+    <PackageTags>msix;appx;desktop;shortcut;windows;uwp;winui</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/qayyumabro/DesktopShortcutInstaller</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.22621.755" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="build\**" Pack="true" PackagePath="build\" />
+  </ItemGroup>
+
+</Project>
