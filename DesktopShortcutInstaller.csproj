@@ -24,10 +24,6 @@
     <!-- <PackageReference Include="Microsoft.Windows.SDK.NET.Ref" Version="10.0.19041.38" PrivateAssets="all" /> -->
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Examples\**\*.cs" />
-    <None Remove="Examples\**\*" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
