@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <!-- If you don't need WinRT APIs, keep it simple -->
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <!-- Specify Windows SDK version to include WinRT APIs properly -->
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>DesktopShortcutInstaller</PackageId>
     <Version>1.0.0</Version>
@@ -16,18 +14,14 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/qayyumabro/DesktopShortcutInstaller</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    
+    <!-- Add these to prevent WinMD reference issues -->
+    <CsWinRTEnabled>true</CsWinRTEnabled>
+    <EnableDefaultXamlItems>false</EnableDefaultXamlItems>
   </PropertyGroup>
-
-  <ItemGroup>
-    <!-- REMOVE these: they are what typically triggers NETSDK1130 via WinMD refs -->
-    <!-- <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.4" /> -->
-    <!-- <PackageReference Include="Microsoft.Windows.SDK.NET.Ref" Version="10.0.19041.38" PrivateAssets="all" /> -->
-  </ItemGroup>
-
-
+  
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
     <None Include="build\**" Pack="true" PackagePath="build\" />
   </ItemGroup>
-
 </Project>
